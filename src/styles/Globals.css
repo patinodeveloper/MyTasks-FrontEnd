@@ -1,0 +1,65 @@
+/* Globals Styles */
+:root {
+    /* Negro Carbón */
+    --primary-color: #1C1C1E;
+    /* Gris Pizarra */
+    --secondary-color: #2E2E3A;
+    /* Cian Oscuro */
+    --accent-color: #00ADB5;
+    /* Gris Ceniza */
+    --background-secondary: #393E46;
+    /* Rojo Óxido */
+    --warning-color: #FF5722;
+    /* Verde Esmeralda */
+    --success-color: #00796B;
+    /* Blanco Hueso */
+    --text-color: #E0E0E0;
+
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-secondary);
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+h1,
+h2,
+h3 {
+    font-family: var(--font-primary);
+    color: var(--text-color);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: var(--font-primary);
+}
+
+.btn:hover {
+    background-color: #008A93;
+}
