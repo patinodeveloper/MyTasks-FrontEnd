@@ -1,4 +1,5 @@
 import '../styles/Projects.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export const Projects = () => {
     // Datos estáticos 
@@ -12,16 +13,20 @@ export const Projects = () => {
         <div className="projects">
             <h2>Mis Proyectos</h2>
             <p className="projects-description">
-                Aquí puedes ver todos tus proyectos actuales, gestionarlos y crear nuevos proyectos para seguir avanzando en tu trabajo.
+                <i className="fas fa-info-circle"></i> Aquí puedes ver todos tus proyectos actuales, gestionarlos y crear nuevos proyectos para seguir avanzando en tu trabajo.
             </p>
-            <button className="create-project-btn">Crear Nuevo Proyecto</button>
+            <button className="create-project-btn">
+                <i className="fas fa-plus-circle"></i> Crear Nuevo Proyecto
+            </button>
             <div className="projects-container">
                 {projects.map((project) => (
                     <div className="card" key={project.id}>
-                        <h3>{project.title}</h3>
+                        <h3><i className="fas fa-folder"></i> {project.title}</h3>
                         <p>{project.description}</p>
-                        <small>Fecha de creación: {project.date}</small>
-                        <button className="view-details-btn">Ver Detalles</button>
+                        <small><i className="fas fa-calendar-alt"></i> Fecha de creación: {project.date}</small>
+                        <button className="view-details-btn">
+                            <i className="fas fa-eye"></i> Ver Detalles
+                        </button>
                     </div>
                 ))}
             </div>
