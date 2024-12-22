@@ -1,6 +1,7 @@
 import { Navbar } from "./components/layout/Navbar"
 import { Home } from "./pages/Home"
 import { Projects } from "./pages/Projects"
+import { ProjectDetail } from "./pages/ProjectDetail"
 
 export const MyTasksApp = () => {
 
@@ -9,7 +10,8 @@ export const MyTasksApp = () => {
             <Navbar />
             <main>
                 {/* <Home /> */}
-                <Projects />
+                {/* <Projects /> */}
+                <ProjectDetail />
             </main>
         </>
     )
