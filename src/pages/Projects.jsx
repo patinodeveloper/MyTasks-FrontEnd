@@ -16,11 +16,11 @@ export const Projects = () => {
                 <i className="fas fa-info-circle"></i> Aquí puedes ver todos tus proyectos actuales, gestionarlos y crear nuevos proyectos para seguir avanzando en tu trabajo.
             </p>
             <button className="create-project-btn">
-                <i className="fas fa-plus-circle"></i> Crear Nuevo Proyecto
+                <i className="fas fa-plus-circle"></i> Nuevo Proyecto
             </button>
             <div className="projects-container">
                 {projects.map((project) => (
-                    <div className="card" key={project.id}>
+                    <div className="card-project" key={project.id}>
                         <h3><i className="fas fa-folder"></i> {project.title}</h3>
                         <p>{project.description}</p>
                         <small><i className="fas fa-calendar-alt"></i> Fecha de creación: {project.date}</small>

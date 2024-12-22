@@ -42,7 +42,7 @@
 }
 
 .create-project-btn:hover {
-    background-color: var(--success-color);
+    background-color: #005b4f;
 }
 
 .create-project-btn i {
@@ -59,12 +59,12 @@
     margin-top: 30px;
 }
 
-.projects-container .card i {
+.projects-container .card-project i {
     margin-right: 5px;
     color: #00796B;
 }
 
-.card {
+.card-project {
     background-color: var(--secondary-color);
     padding: 20px;
     border-radius: 10px;
@@ -75,12 +75,12 @@
     color: var(--text-color);
 }
 
-.card:hover {
+.card-project:hover {
     transform: scale(1.05);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.card h3 {
+.card-project h3 {
     font-family: var(--font-primary);
     font-size: 1.8rem;
     margin-bottom: 10px;
@@ -88,14 +88,14 @@
     color: var(--accent-color);
 }
 
-.card p {
+.card-project p {
     font-family: var(--font-secondary);
     font-size: 1.1rem;
     margin-bottom: 10px;
     color: var(--text-color);
 }
 
-.card small {
+.card-project small {
     font-family: var(--font-secondary);
     font-size: 0.9rem;
     color: var(--text-color);
