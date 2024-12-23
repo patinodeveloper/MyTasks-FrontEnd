@@ -9,7 +9,7 @@
     /* Gris Ceniza */
     --background-secondary: #393E46;
     /* Rojo Óxido */
-    --warning-color: #FF5722;
+    --warning-color: #E64A19;
     /* Verde Vivo */
     --success-color: #4CAF50;
     /* Blanco Hueso */
@@ -17,6 +17,22 @@
 
     --font-primary: 'Poppins', sans-serif;
     --font-secondary: 'Roboto', sans-serif;
+
+    /* Colores de estado */
+    /* Verde Azulado */
+    --status-activo: #00796b;
+    /* Amarillo Vivo */
+    --status-pendiente: #fbc02d;
+    /* Verde Oscuro */
+    --status-completado: #388e3c;
+
+    /* Colores de prioridad */
+    /* Rojo Intenso */
+    --priority-alta: #d32f2f;
+    /* Naranja Vivo */
+    --priority-media: #f57c00;
+    /* Azul Intenso */
+    --priority-baja: #1976d2;
 }
 
 body {
@@ -62,4 +78,88 @@ a:hover {
 
 .btn:hover {
     background-color: #008A93;
+}
+
+.edit-button,
+.delete-button,
+.back-button,
+.finish-button {
+    padding: 10px 15px;
+    background-color: #B38600;
+    color: var(--text-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(220, 205, 63, 0.2);
+}
+
+.edit-button:hover {
+    background-color: #CC9A00;
+    transform: scale(1.05);
+}
+
+.delete-button {
+    background-color: var(--warning-color);
+    box-shadow: 0 4px 8px rgba(255, 69, 0, 0.3);
+}
+
+.delete-button:hover {
+    background-color: #FF5722;
+    transform: scale(1.05);
+}
+
+.back-button {
+    background-color: #008A93;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:hover {
+    background-color: #06a3ae;
+    transform: scale(1.05);
+}
+
+.finish-button {
+    background-color: #007F00;
+    box-shadow: 0 4px 8px rgba(2, 141, 2, 0.2);
+}
+
+.finish-button:hover {
+    background-color: #009900;
+    transform: scale(1.05);
+}
+
+.finish-button.disabled {
+    background-color: #d3d3d3;
+    color: #8c8c8c;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.finish-button.disabled:hover {
+    background-color: #d3d3d3;
+}
+
+.action-buttons {
+    display: flex;
+    /* Ajusta los botones */
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+@media (max-width: 512px) {
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .action-buttons button {
+        width: 80%;
+    }
 }

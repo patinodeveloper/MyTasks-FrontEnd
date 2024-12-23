@@ -1,4 +1,4 @@
-/* Project Detail Styles */
+/* Task Detail Styles */
 .page-title {
     font-family: var(--font-primary);
     font-size: 2.5rem;
@@ -6,7 +6,7 @@
     text-align: center;
 }
 
-.project-detail-container {
+.task-detail-container {
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -16,7 +16,7 @@
     color: var(--text-color);
 }
 
-.project-card {
+.task-card {
     background-color: var(--secondary-color);
     padding: 20px;
     border-radius: 12px;
@@ -28,8 +28,7 @@
     gap: 20px;
 }
 
-/* Header */
-.project-header {
+.task-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,7 +36,7 @@
     padding-bottom: 10px;
 }
 
-.project-title {
+.task-title {
     font-family: var(--font-primary);
     font-size: 1.8rem;
     color: var(--accent-color);
@@ -46,7 +45,7 @@
     gap: 10px;
 }
 
-.project-status {
+.task-status {
     padding: 5px 15px;
     border-radius: 20px;
     font-size: 0.9rem;
@@ -57,26 +56,26 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.project-status:hover {
+.task-status:hover {
     transform: scale(1.05);
 }
 
-.project-status.completado {
+.task-status.completado {
     background-color: var(--success-color);
     color: #fff;
 }
 
-.project-status.activo {
+.task-status.activo {
     background-color: var(--accent-color);
     color: #fff;
 }
 
-.project-status.pendiente {
+.task-status.pendiente {
     background-color: var(--warning-color);
     color: #fff;
 }
 
-.project-description {
+.task-description {
     font-family: var(--font-secondary);
     font-size: 1rem;
     line-height: 1.5;
@@ -86,34 +85,53 @@
     border-radius: 8px;
 }
 
-.project-details-grid {
+.task-details-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
 }
 
-.project-detail-item {
+.task-detail-item {
     display: flex;
     align-items: center;
     gap: 10px;
 }
 
-.project-detail-item span {
+.task-detail-item span {
     font-weight: bold;
     font-family: var(--font-primary);
     color: var(--accent-color);
 }
 
-.project-detail-item p {
-    font-family: var(--font-secondary, 'Arial', sans-serif);
+.task-detail-item p {
+    font-family: var(--font-secondary);
     margin: 0;
 }
 
-.project-footer {
+/* Prioridad */
+.priority p {
+    font-weight: bold;
+}
+
+.priority-alta {
+    color: #d32f2f;
+}
+
+.priority-media {
+    color: #f57c00;
+}
+
+.priority-baja {
+    color: #1976d2;
+}
+
+/* Botones */
+.task-footer {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid var(--background-secondary);
     display: flex;
+    /* Cambia a columna en pantallas pequeñas */
     flex-direction: column;
     gap: 10px;
 }
