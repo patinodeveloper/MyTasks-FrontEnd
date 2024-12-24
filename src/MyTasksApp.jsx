@@ -12,10 +12,10 @@ export const MyTasksApp = () => {
             <Navbar />
             <main>
                 {/* <Home /> */}
-                {/* <Projects /> */}
+                <Projects />
                 {/* <ProjectDetail /> */}
                 {/* <Tasks /> */}
-                <TaskDetail />
+                {/* <TaskDetail /> */}
             </main>
         </>
     )

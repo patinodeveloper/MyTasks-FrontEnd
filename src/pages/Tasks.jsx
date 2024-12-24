@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import '../styles/Tasks.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { TaskModal } from '../components/TaskModal';
 
 export const Tasks = () => {
     // Datos estáticos
@@ -38,15 +40,20 @@ export const Tasks = () => {
         },
     ];
 
+    const [isModalOpen, setIsModalOpen] = useState(true);
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="tasks">
             <h2>Mis Tareas</h2>
             <p className="tasks-description">
                 Aquí puedes ver todas tus tareas pendientes, asignarlas a proyectos y realizar un seguimiento de su progreso.
             </p>
-            <button className="create-task-btn">
-                <i className="fas fa-plus"></i> Nueva Tarea
-            </button>
+            {/* Modal para crear un nuevo proyecto */}
+            {isModalOpen && <TaskModal onClose={closeModal} />}
             <div className="tasks-container">
                 {tasks.map((task) => (
                     <div className="card-task" key={task.id}>

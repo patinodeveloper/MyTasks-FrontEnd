@@ -1,5 +1,7 @@
 import '../styles/Projects.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { ProjectModal } from '../components/ProjectModal';
+import { useState } from 'react';
 
 export const Projects = () => {
     // Datos estáticos 
@@ -9,15 +11,20 @@ export const Projects = () => {
         { id: 3, title: 'Proyecto 3', description: 'Descripción del proyecto 3', date: '2024-12-15' },
     ];
 
+    const [isModalOpen, setIsModalOpen] = useState(true);
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="projects">
             <h2>Mis Proyectos</h2>
             <p className="projects-description">
                 <i className="fas fa-info-circle"></i> Aquí puedes ver todos tus proyectos actuales, gestionarlos y crear nuevos proyectos para seguir avanzando en tu trabajo.
             </p>
-            <button className="create-project-btn">
-                <i className="fas fa-plus-circle"></i> Nuevo Proyecto
-            </button>
+            {/* Modal para crear un nuevo proyecto */}
+            {isModalOpen && <ProjectModal onClose={closeModal} />}
             <div className="projects-container">
                 {projects.map((project) => (
                     <div className="card-project" key={project.id}>
