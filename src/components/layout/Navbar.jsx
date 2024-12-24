@@ -1,6 +1,8 @@
-import '../../styles/Header.css'
+import { Link, useLocation } from 'react-router';
+import '../../styles/Header.css';
 
 export const Navbar = () => {
+    const location = useLocation();
 
     return (
         <header className="header">
@@ -8,13 +10,35 @@ export const Navbar = () => {
                 <h1>MyTasks</h1>
                 <nav>
                     <ul>
-                        <li>Inicio</li>
-                        <li>Proyectos</li>
-                        <li>Tareas</li>
+                        <li>
+                            <Link
+                                className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}
+                                to="/"
+                            >
+                                Inicio
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className={`nav-link ${location.pathname === '/projects' ? 'active' : ''
+                                    }`}
+                                to="/projects"
+                            >
+                                Proyectos
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                className={`nav-link ${location.pathname === '/tasks' ? 'active' : ''
+                                    }`}
+                                to="/tasks"
+                            >
+                                Tareas
+                            </Link>
+                        </li>
                     </ul>
                 </nav>
             </div>
         </header>
-
-    )
-}
+    );
+};

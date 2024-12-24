@@ -29,7 +29,7 @@
 
 .create-project-btn {
     padding: 12px 24px;
-    background-color: var(--accent-color);
+    background-color: #00796b;
     color: var(--text-color);
     border: none;
     border-radius: 4px;

@@ -43,6 +43,23 @@ nav ul li:hover {
     color: var(--accent-color);
 }
 
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-link.active {
+    color: var(--accent-color);
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.nav-link:hover {
+    color: var(--hover-color);
+    text-decoration: none;
+}
+
 @media (max-width: 768px) {
     .header {
         text-align: center;

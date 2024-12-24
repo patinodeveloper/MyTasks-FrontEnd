@@ -84,6 +84,7 @@
 }
 
 .save-btn,
+.edit-btn,
 .cancel-btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -102,6 +103,15 @@
 
 .save-btn:hover {
     background-color: #005b4f;
+}
+
+.edit-btn {
+    background-color: #fbc02d;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #d7a21d;
 }
 
 .cancel-btn {
