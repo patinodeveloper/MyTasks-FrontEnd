@@ -113,8 +113,9 @@ a:hover {
 }
 
 .back-button {
+    text-align: center;
     background-color: #008A93;
-    margin-top: 20px;
+    margin-top: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 

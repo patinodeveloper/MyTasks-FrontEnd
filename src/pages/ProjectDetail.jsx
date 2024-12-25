@@ -1,20 +1,28 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../styles/ProjectDetail.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
-const project = {
-    id: 1,
-    name: 'Proyecto Principal',
-    description: 'Este es un proyecto diseñado para gestionar múltiples sistemas.',
-    startDate: '2024-12-01',
-    endDate: null,
-    status: 'ACTIVO',
-    owner: 'Juan Pérez',
-    priority: 'ALTA',
-};
+import { Link, useParams } from 'react-router';
+import { ProjectContext } from '../context/ProjectContext';
+import { ProjectModal } from '../components/ProjectModal';
 
 export const ProjectDetail = () => {
-    const [projectStatus, setProjectStatus] = useState(project.status);
+    const { id } = useParams();
+    const { projectSelected, getProjectById, handlerProjectSelectedForm, isModalOpen, toggleEditModal, handlerRemoveProject } = useContext(ProjectContext);
+
+    const [projectStatus, setProjectStatus] = useState('');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (id) {
+            getProjectById(id);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        if (projectSelected && projectSelected.status) {
+            setProjectStatus(projectSelected.status);
+        }
+    }, [projectSelected]);
 
     const cycleStatus = () => {
         const statuses = ['ACTIVO', 'PENDIENTE'];
@@ -24,6 +32,11 @@ export const ProjectDetail = () => {
 
     const setToCompleted = () => {
         setProjectStatus('COMPLETADO');
+    };
+
+    const openEditModal = () => {
+        handlerProjectSelectedForm(projectSelected);
+        toggleEditModal();
     };
 
     const getStatusClass = (status) => {
@@ -40,37 +53,37 @@ export const ProjectDetail = () => {
     };
 
     return (
-        <div className="project-detail-page">
+        <div id='title' className="project-detail-page">
             <h1 className="page-title">Detalles del Proyecto</h1>
             <div className="project-detail-container">
                 <div className="project-card">
                     <header className="project-header">
                         <h1 className="project-title">
-                            <i className="fas fa-folder"></i> {project.name}
+                            <i className="fas fa-folder"></i> {projectSelected?.name}
                         </h1>
                         <button
                             className={getStatusClass(projectStatus)}
                             onClick={cycleStatus}
                         >
-                            {projectStatus}
+                            {projectStatus || 'Cargando...'}
                         </button>
                     </header>
                     <p className="project-description">
-                        {project.description || 'No hay descripción disponible.'}
+                        {projectSelected?.description || 'No hay descripción disponible.'}
                     </p>
                     <div className="project-details-grid">
                         <div className="project-detail-item">
                             <i className="fas fa-calendar-alt"></i>
                             <div>
                                 <span>Inicio:</span>
-                                <p>{project.startDate}</p>
+                                <p>{projectSelected?.startTime}</p>
                             </div>
                         </div>
                         <div className="project-detail-item">
                             <i className="fas fa-calendar-times"></i>
                             <div>
                                 <span>Fin:</span>
-                                <p>{project.endDate || 'No especificada'}</p>
+                                <p>{projectSelected?.endTime || 'No especificada'}</p>
                             </div>
                         </div>
                     </div>
@@ -83,16 +96,22 @@ export const ProjectDetail = () => {
                             >
                                 <i className="fas fa-check-circle"></i> Finalizar
                             </button>
-                            <button className="edit-button">
+                            <button className="edit-button" onClick={openEditModal}>
                                 <i className="fas fa-edit"></i> Editar
                             </button>
-                            <button className="delete-button">
+
+
+                            <button
+                                className="delete-button"
+                                onClick={() => handlerRemoveProject(projectSelected.id)}
+                            >
                                 <i className="fas fa-trash-alt"></i> Eliminar
                             </button>
                         </div>
-                        <button className="back-button">
+                        {isModalOpen && <ProjectModal onClose={toggleEditModal} />}
+                        <Link className="back-button" to="/projects" style={{ textDecoration: 'none' }}>
                             <i className="fas fa-arrow-left"></i> Volver a Proyectos
-                        </button>
+                        </Link>
                     </footer>
                 </div>
             </div>

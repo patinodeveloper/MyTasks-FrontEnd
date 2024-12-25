@@ -5,15 +5,20 @@ export const ProjectProvider = ({ children }) => {
     const {
         projects,
         projectSelected,
+        setProjectSelected,
         initialProjectForm,
         isLoading,
         isOpen,
+        isModalOpen, 
+        setIsModalOpen,
 
         getProjects,
+        getProjectById,
         handlerAddProject,
         handlerRemoveProject,
         handlerProjectSelectedForm,
-        toggleModal
+        toggleModal,
+        toggleEditModal
     } = useProjects();
 
     return (
@@ -21,15 +26,20 @@ export const ProjectProvider = ({ children }) => {
             {
                 projects,
                 projectSelected,
+                setProjectSelected,
                 initialProjectForm,
                 isLoading,
                 isOpen,
+                isModalOpen,
+                setIsModalOpen,
 
                 getProjects,
+                getProjectById,
                 handlerAddProject,
                 handlerRemoveProject,
                 handlerProjectSelectedForm,
-                toggleModal
+                toggleModal,
+                toggleEditModal
             }
         }>
             {children}

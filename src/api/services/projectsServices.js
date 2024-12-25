@@ -17,7 +17,7 @@ export const findAllProjects = async () => {
 export const findProjectById = async (id) => {
     try {
         const response = await axios.get(`${URL}/${id}`);
-        return response.data.length > 0 ? response.data : [];
+        return response.data; // sin validar
     } catch (error) {
         console.error(error);
         return { error: true, message: `Error al cargar el proyecto con el ID: ${id}` };

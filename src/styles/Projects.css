@@ -116,6 +116,7 @@
 
 .view-details-btn:hover {
     background-color: var(--warning-color);
+    text-decoration: none;
 }
 
 .view-details-btn i {

@@ -1,13 +1,13 @@
 import '../styles/Projects.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ProjectModal } from '../components/ProjectModal';
-import { useState, useEffect, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { ProjectContext } from '../context/ProjectContext';
+import { Link } from 'react-router';
 
 export const Projects = () => {
-    const { projects, getProjects } = useContext(ProjectContext);
-    const [isModalOpen, setIsModalOpen] = useState(true);
-    
+    const { projects, getProjects, isModalOpen, setIsModalOpen, toggleModal } = useContext(ProjectContext);
+
     const closeModal = () => {
         setIsModalOpen(false);
     };
@@ -22,17 +22,21 @@ export const Projects = () => {
             <p className="projects-description">
                 <i className="fas fa-info-circle"></i> Aquí puedes ver todos tus proyectos actuales, gestionarlos y crear nuevos proyectos para seguir avanzando en tu trabajo.
             </p>
+            <button className="create-project-btn" onClick={toggleModal}>
+                <i className="fas fa-plus-circle"></i> Nuevo Proyecto
+            </button>
             {/* Modal para crear un nuevo proyecto */}
             {isModalOpen && <ProjectModal onClose={closeModal} />}
+
             <div className="projects-container">
                 {projects.map((project) => (
                     <div className="card-project" key={project.id}>
                         <h3><i className="fas fa-folder"></i> {project.name}</h3>
                         <p>{project.description}</p>
                         <small><i className="fas fa-calendar-alt"></i> Fecha de creación: {project.startTime}</small>
-                        <button className="view-details-btn">
-                            <i className="fas fa-eye"></i> Ver Detalles
-                        </button>
+                        <Link className='view-details-btn' to={`/projects/${project.id}`}>
+                            <i href='#title' className="fas fa-eye"></i> Ver Detalles
+                        </Link>
                     </div>
                 ))}
             </div>

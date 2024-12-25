@@ -20,8 +20,7 @@ export const Navbar = () => {
                         </li>
                         <li>
                             <Link
-                                className={`nav-link ${location.pathname === '/projects' ? 'active' : ''
-                                    }`}
+                                className={`nav-link ${location.pathname.startsWith('/projects') ? 'active' : ''}`}
                                 to="/projects"
                             >
                                 Proyectos
@@ -29,7 +28,7 @@ export const Navbar = () => {
                         </li>
                         <li>
                             <Link
-                                className={`nav-link ${location.pathname === '/tasks' ? 'active' : ''
+                                className={`nav-link ${location.pathname.startsWith('/tasks') ? 'active' : ''
                                     }`}
                                 to="/tasks"
                             >

@@ -1,11 +1,12 @@
 import { useReducer, useState } from "react";
 import { projectReducer } from "../reducers/projectReducer";
-import { findAllProjects, removeProject, saveProject, updateProject } from "../api/services/projectsServices";
+import { findAllProjects, findProjectById, removeProject, saveProject, updateProject } from "../api/services/projectsServices";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const initialProjects = [];
 const initialProjectForm = {
-    id: 0,
+    id: 0, // Despues de Spring Boot 3.3.5 el ID debe ser null/undefined en lugar de 0
     name: '',
     description: '',
     startTime: new Date().toISOString().split('T')[0],
@@ -19,9 +20,17 @@ export const useProjects = () => {
     const [visibleForm, setVisibleForm] = useState(false);
     const [isLoading, setIsLoading] = useState(false); 
 
+    const [isModalOpen, setIsModalOpen] = useState(true);
+
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
 
     const toggleModal = () => {
+        setIsOpen(!isOpen);
+        setProjectSelected(initialProjectForm);
+    };
+
+    const toggleEditModal = () => {
         setIsOpen(!isOpen);
     };
 
@@ -40,10 +49,24 @@ export const useProjects = () => {
             // setIsLoading(false);
         }
     };
+
+    const getProjectById = async (id) => {
+        try {
+            // setIsLoading(true);
+            const result = await findProjectById(id);
+            console.log("Proyecto obtenido:", result);
+            setProjectSelected(result);
+        } catch (error) {
+            console.error("Error al cargar el proyecto", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
     
     const handlerAddProject = async (project) => {
         console.log(project);
         console.log(project.id);
+         // Despues de Spring Boot 3.3.5 el ID debe ser null/undefined en lugar de === 0
         const type = (project.id === 0) ? "addProject" : "updateProject";
         let response;
         try {
@@ -63,6 +86,8 @@ export const useProjects = () => {
                 payload: response.data,
             });
 
+            setProjectSelected(response.data);
+
             Swal.fire(
                 (project.id === 0) ? "Proyecto Registrado" : "Proyecto Actualizado",
                 (project.id === 0)
@@ -70,7 +95,7 @@ export const useProjects = () => {
                     : "El Proyecto ha sido actualizado con éxito",
                 "success"
             );
-            toggleModal();
+            toggleEditModal();
         } catch (error) {
             if (error.response?.status === 400) {
                 setErrors(error.response.data);
@@ -105,6 +130,8 @@ export const useProjects = () => {
                         text: "El proyecto se ha eliminado exitosamente",
                         icon: "success"
                     });
+
+                    navigate("/projects");
                 }
             });
         } catch (error) {
@@ -127,15 +154,20 @@ export const useProjects = () => {
     return {
         projects,
         projectSelected,
+        setProjectSelected,
         initialProjectForm,
         isLoading,
         isOpen,
+        isModalOpen, 
+        setIsModalOpen,
 
         getProjects,
+        getProjectById,
         handlerAddProject,
         handlerRemoveProject,
         handlerProjectSelectedForm,
-        toggleModal
+        toggleModal,
+        toggleEditModal,
     }
 
 }

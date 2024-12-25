@@ -3,6 +3,7 @@ import { ProjectProvider } from "../context/ProjectProvider"
 import { Home } from "../pages/Home"
 import { Projects } from "../pages/Projects"
 import { Tasks } from "../pages/Tasks"
+import { ProjectDetail } from "../pages/ProjectDetail"
 
 export const AppRoutes = () => {
 
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/projects" element={<Projects />} />
                     <Route path="/tasks" element={<Tasks />} />
+                    <Route path="/projects/:id" element={<ProjectDetail />} /> 
                 </Routes>
             </ ProjectProvider>
         </>
