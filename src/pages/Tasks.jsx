@@ -1,49 +1,46 @@
-import { useState } from 'react';
 import '../styles/Tasks.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { useContext, useEffect } from 'react';
+import { TaskContext } from '../context/TaskContext';
 import { TaskModal } from '../components/TaskModal';
+import { Link } from 'react-router';
 
 export const Tasks = () => {
-    // Datos estáticos
-    const tasks = [
-        {
-            id: 1,
-            name: 'Tarea 1',
-            startDate: '2024-12-20',
-            status: 'ACTIVO',
-            priority: 'ALTA',
-            project: 'Proyecto 1',
-        },
-        {
-            id: 2,
-            name: 'Tarea 2',
-            startDate: '2024-12-18',
-            status: 'PENDIENTE',
-            priority: 'MEDIA',
-            project: 'Proyecto 2',
-        },
-        {
-            id: 3,
-            name: 'Tarea 3',
-            startDate: '2024-12-15',
-            status: 'COMPLETADO',
-            priority: 'BAJA',
-            project: 'Proyecto 3',
-        },
-        {
-            id: 4,
-            name: 'Tarea 4',
-            startDate: '2024-12-10',
-            status: 'ACTIVO',
-            priority: 'ALTA',
-            project: 'Proyecto 1',
-        },
-    ];
 
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const { tasks, getTasks, isModalOpen, setIsModalOpen, toggleModal } = useContext(TaskContext);
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    useEffect(() => {
+        getTasks();
+    }, []);
+
+    const getStatusClass = (status) => {
+        switch (status.toLowerCase()) {
+            case 'completado':
+                return 'status-completado';
+            case 'activo':
+                return 'status-activo';
+            case 'pendiente':
+                return 'status-pendiente';
+            default:
+                return 'status';
+        }
+    };
+
+    const getPriorityClass = (priority) => {
+        switch (priority.toLowerCase()) {
+            case 'baja':
+                return 'priority-baja';
+            case 'media':
+                return 'priority-media';
+            case 'alta':
+                return 'priority-alta';
+            default:
+                return 'priority';
+        }
     };
 
     return (
@@ -52,16 +49,19 @@ export const Tasks = () => {
             <p className="tasks-description">
                 Aquí puedes ver todas tus tareas pendientes, asignarlas a proyectos y realizar un seguimiento de su progreso.
             </p>
+            <button className="create-task-btn" onClick={toggleModal}>
+                <i className="fas fa-plus-circle"></i> Nueva Tarea
+            </button>
             {/* Modal para crear un nuevo proyecto */}
             {isModalOpen && <TaskModal onClose={closeModal} />}
             <div className="tasks-container">
                 {tasks.map((task) => (
                     <div className="card-task" key={task.id}>
                         <h3><i className="fas fa-thumbtack"></i> {task.name}</h3>
-                        <p><strong>Fecha de Inicio:</strong> {task.startDate}</p>
-                        <p><strong>Estatus:</strong> {task.status}</p>
-                        <p><strong>Prioridad:</strong> {task.priority}</p>
-                        <p><strong>Proyecto:</strong> {task.project}</p>
+                        <p><strong>Fecha de Inicio:</strong> {task.startTime}</p>
+                        <p className={getStatusClass(task.status)}><strong>Estatus:</strong> {task.status}</p>
+                        <p className={getPriorityClass(task.priority)}><strong>Prioridad:</strong> {task.priority}</p>
+                        <p><strong>Proyecto:</strong> {task.project.name}</p>
                         <button className="view-details-btn">
                             <i className="fas fa-eye"></i> Ver Detalles
                         </button>

@@ -49,12 +49,12 @@
     gap: 20px;
     max-width: 1200px;
     width: 100%;
-    margin: 0 auto;
+    margin: 20px auto;
     justify-content: center;
 }
 
 .card-task {
-    background-color: #fff;
+    background-color: #ebebeb;
     max-width: 90%;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -105,33 +105,41 @@
 }
 
 /* Colores de estado */
-.status-activo {
+.card-task p.status {
+    color: #666;
+}
+
+.card-task p.status-activo {
     color: #00796b;
     font-weight: bold;
 }
 
-.status-pendiente {
-    color: #fbc02d;
+.card-task p.status-pendiente {
+    color: #d9a404;
     font-weight: bold;
 }
 
-.status-completado {
+.card-task p.status-completado {
     color: #388e3c;
     font-weight: bold;
 }
 
 /* Colores de prioridad */
-.priority-alta {
+.card-task p.priority {
+    color: #666;
+}
+
+.card-task p.priority-alta {
     color: #d32f2f;
     font-weight: bold;
 }
 
-.priority-media {
-    color: #f57c00;
+.card-task p.priority-media {
+    color: #d9a404;
     font-weight: bold;
 }
 
-.priority-baja {
+.card-task p.priority-baja {
     color: #1976d2;
     font-weight: bold;
 }

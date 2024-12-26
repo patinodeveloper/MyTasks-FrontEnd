@@ -64,7 +64,6 @@ export const ProjectModal = () => {
         setProjectForm(initialProjectForm);
     };
 
-
     const closeModal = () => {
         if (projectSelected.id > 0) {
             toggleEditModal();
