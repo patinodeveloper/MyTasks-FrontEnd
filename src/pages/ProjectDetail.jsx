@@ -53,7 +53,7 @@ export const ProjectDetail = () => {
     };
 
     return (
-        <div id='title' className="project-detail-page">
+        <div className="project-detail-page">
             <h1 className="page-title">Detalles del Proyecto</h1>
             <div className="project-detail-container">
                 <div className="project-card">
@@ -99,8 +99,6 @@ export const ProjectDetail = () => {
                             <button className="edit-button" onClick={openEditModal}>
                                 <i className="fas fa-edit"></i> Editar
                             </button>
-
-
                             <button
                                 className="delete-button"
                                 onClick={() => handlerRemoveProject(projectSelected.id)}

@@ -119,9 +119,15 @@
     text-decoration: none;
 }
 
-.view-details-btn i {
+.projects-container .card-project .view-details-btn i {
     margin-right: 5px;
+    color: white;
 }
+
+/* .view-details-btn i {
+    margin-right: 5px;
+    color: white;
+} */
 
 @media (max-width: 1112px) {
     .projects-container {

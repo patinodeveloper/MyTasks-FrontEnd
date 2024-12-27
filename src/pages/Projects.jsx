@@ -35,7 +35,7 @@ export const Projects = () => {
                         <p>{project.description}</p>
                         <small><i className="fas fa-calendar-alt"></i> Fecha de creación: {project.startTime}</small>
                         <Link className='view-details-btn' to={`/projects/${project.id}`}>
-                            <i href='#title' className="fas fa-eye"></i> Ver Detalles
+                            <i className="fas fa-eye"></i> Ver Detalles
                         </Link>
                     </div>
                 ))}

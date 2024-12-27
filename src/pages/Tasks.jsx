@@ -62,9 +62,9 @@ export const Tasks = () => {
                         <p className={getStatusClass(task.status)}><strong>Estatus:</strong> {task.status}</p>
                         <p className={getPriorityClass(task.priority)}><strong>Prioridad:</strong> {task.priority}</p>
                         <p><strong>Proyecto:</strong> {task.project.name}</p>
-                        <button className="view-details-btn">
+                        <Link className="view-details-btn" to={`/tasks/${task.id}`}>
                             <i className="fas fa-eye"></i> Ver Detalles
-                        </button>
+                        </Link>
                     </div>
                 ))}
             </div>

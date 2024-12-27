@@ -1,20 +1,28 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../styles/TaskDetail.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
-const task = {
-    id: 101,
-    name: 'Tarea 1',
-    description: 'Esta tarea es parte del proyecto principal para gestionar el sistema.',
-    startDate: '2024-12-10',
-    endDate: '2024-12-20',
-    status: 'COMPLETADO',
-    priority: 'ALTA',
-    projectName: 'Proyecto Principal',
-};
+import { Link, useParams } from 'react-router';
+import { TaskContext } from "../context/TaskContext";
+import { TaskModal } from "../components/TaskModal";
 
 export const TaskDetail = () => {
-    const [taskStatus, setTaskStatus] = useState(task.status);
+    const { id } = useParams();
+    const { taskSelected, getTaskById, handlerTaskSelectedForm, isModalOpen, toggleEditModal, handlerRemoveTask } = useContext(TaskContext);
+
+    const [taskStatus, setTaskStatus] = useState('');
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        if (id) {
+            getTaskById(id);
+        }
+    }, [id])
+
+    useEffect(() => {
+        if (taskSelected && taskSelected.status) {
+            setTaskStatus(taskSelected.status);
+        }
+    },[taskSelected])
 
     const cycleStatus = () => {
         const statuses = ['PENDIENTE', 'ACTIVO'];
@@ -24,6 +32,11 @@ export const TaskDetail = () => {
 
     const setToCompleted = () => {
         setTaskStatus('COMPLETADO');
+    };
+
+    const openEditModal = () => {
+        handlerTaskSelectedForm(taskSelected);
+        toggleEditModal();
     };
 
     const getStatusClass = (status) => {
@@ -46,39 +59,39 @@ export const TaskDetail = () => {
                 <div className="task-card">
                     <header className="task-header">
                         <h1 className="task-title">
-                            <i className="fas fa-tasks"></i> {task.name}
+                            <i className="fas fa-tasks"></i> {taskSelected?.name}
                         </h1>
                         <button
                             className={getStatusClass(taskStatus)}
                             onClick={cycleStatus}
                         >
-                            {taskStatus}
+                            {taskStatus || 'Cargando...'}
                         </button>
                     </header>
                     <p className="task-description">
-                        {task.description || 'No hay descripción disponible.'}
+                        {taskSelected?.description || 'No hay descripción disponible.'}
                     </p>
                     <div className="task-details-grid">
                         <div className="task-detail-item">
                             <i className="fas fa-calendar-alt"></i>
                             <div>
                                 <span>Inicio:</span>
-                                <p>{task.startDate}</p>
+                                <p>{taskSelected?.startTime}</p>
                             </div>
                         </div>
                         <div className="task-detail-item">
                             <i className="fas fa-calendar-times"></i>
                             <div>
                                 <span>Fin:</span>
-                                <p>{task.endDate || 'No especificada'}</p>
+                                <p>{taskSelected?.endTime || 'No especificada'}</p>
                             </div>
                         </div>
                         <div className="task-detail-item">
                             <i className="fas fa-exclamation-circle"></i>
                             <div>
                                 <span>Prioridad:</span>
-                                <p className={`priority-${task.priority.toLowerCase()}`}>
-                                    {task.priority}
+                                <p className={`priority priority-${taskSelected.priority.toLowerCase()}`}>
+                                    {taskSelected?.priority}
                                 </p>
                             </div>
                         </div>
@@ -86,7 +99,7 @@ export const TaskDetail = () => {
                             <i className="fas fa-project-diagram"></i>
                             <div>
                                 <span>Proyecto:</span>
-                                <p>{task.projectName}</p>
+                                <p>{taskSelected?.project.name}</p>
                             </div>
                         </div>
                     </div>
@@ -99,17 +112,20 @@ export const TaskDetail = () => {
                             >
                                 <i className="fas fa-check-circle"></i> Finalizar
                             </button>
-
-                            <button className="edit-button">
+                            <button className="edit-button" onClick={openEditModal}>
                                 <i className="fas fa-edit"></i> Editar
                             </button>
-                            <button className="delete-button">
+                            <button
+                                className="delete-button"
+                                onClick={() => handlerRemoveTask(taskSelected.id)}
+                            >
                                 <i className="fas fa-trash-alt"></i> Eliminar
                             </button>
                         </div>
-                        <button className="back-button">
+                        {isModalOpen && <TaskModal onClose={toggleEditModal} />}
+                        <Link className="back-button" to="/tasks" style={{ textDecoration: 'none' }}>
                             <i className="fas fa-arrow-left"></i> Volver a Tareas
-                        </button>
+                        </Link>
                     </footer>
                 </div>
             </div>

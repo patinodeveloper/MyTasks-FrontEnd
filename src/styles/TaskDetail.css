@@ -109,7 +109,7 @@
 }
 
 /* Prioridad */
-.priority p {
+.priority {
     font-weight: bold;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .priority-media {
-    color: #f57c00;
+    color: #d9a404;
 }
 
 .priority-baja {
