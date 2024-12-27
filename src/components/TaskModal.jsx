@@ -166,11 +166,12 @@ export const TaskModal = () => {
                                 </select>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="project">Proyecto Relacionado *</label>
+                                <label htmlFor="project">Proyecto Relacionado * <span className='no'>{id ? 'No editable' : ''}</span></label>
                                 <select
                                     name="project"
                                     value={project?.id || ''}
                                     onChange={onProjectChange}
+                                    disabled={taskSelected.id}
                                 >
                                     <option value="">Seleccionar proyecto</option>
                                     {projects.length > 0 ? (

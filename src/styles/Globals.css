@@ -209,6 +209,10 @@ a:hover {
     text-align: center;
 }
 
+.no {
+    color: var(--warning-color);
+}
+
 .no-content-message {
     font-weight: 600;
     font-size: 1.2rem;
