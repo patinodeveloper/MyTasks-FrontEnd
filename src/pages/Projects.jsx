@@ -28,18 +28,26 @@ export const Projects = () => {
             {/* Modal para crear un nuevo proyecto */}
             {isModalOpen && <ProjectModal onClose={closeModal} />}
 
-            <div className="projects-container">
-                {projects.map((project) => (
-                    <div className="card-project" key={project.id}>
-                        <h3><i className="fas fa-folder"></i> {project.name}</h3>
-                        <p>{project.description}</p>
-                        <small><i className="fas fa-calendar-alt"></i> Fecha de creación: {project.startTime}</small>
-                        <Link className='view-details-btn' to={`/projects/${project.id}`}>
-                            <i className="fas fa-eye"></i> Ver Detalles
-                        </Link>
-                    </div>
-                ))}
-            </div>
+            {projects.length === 0 ? (
+                <div className="no-content">
+                    <p className="no-content-message">
+                        <i className="fas fa-exclamation-circle"></i> No hay proyectos registrados en el sistema
+                    </p>
+                </div>
+            ) : (
+                <div className="projects-container">
+                    {projects.map((project) => (
+                        <div className="card-project" key={project.id}>
+                            <h3><i className="fas fa-folder"></i> {project.name}</h3>
+                            <p>{project.description}</p>
+                            <small><i className="fas fa-calendar-alt"></i> Fecha de creación: {project.startTime}</small>
+                            <Link className='view-details-btn' to={`/projects/${project.id}`}>
+                                <i className="fas fa-eye"></i> Ver Detalles
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };

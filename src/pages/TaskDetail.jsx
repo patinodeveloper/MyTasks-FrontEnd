@@ -22,7 +22,7 @@ export const TaskDetail = () => {
         if (taskSelected && taskSelected.status) {
             setTaskStatus(taskSelected.status);
         }
-    },[taskSelected])
+    }, [taskSelected])
 
     const cycleStatus = () => {
         const statuses = ['PENDIENTE', 'ACTIVO'];
@@ -56,78 +56,86 @@ export const TaskDetail = () => {
         <div className="task-detail-page">
             <h1 className="page-title">Detalles de la Tarea</h1>
             <div className="task-detail-container">
-                <div className="task-card">
-                    <header className="task-header">
-                        <h1 className="task-title">
-                            <i className="fas fa-tasks"></i> {taskSelected?.name}
-                        </h1>
-                        <button
-                            className={getStatusClass(taskStatus)}
-                            onClick={cycleStatus}
-                        >
-                            {taskStatus || 'Cargando...'}
-                        </button>
-                    </header>
-                    <p className="task-description">
-                        {taskSelected?.description || 'No hay descripción disponible.'}
-                    </p>
-                    <div className="task-details-grid">
-                        <div className="task-detail-item">
-                            <i className="fas fa-calendar-alt"></i>
-                            <div>
-                                <span>Inicio:</span>
-                                <p>{taskSelected?.startTime}</p>
-                            </div>
-                        </div>
-                        <div className="task-detail-item">
-                            <i className="fas fa-calendar-times"></i>
-                            <div>
-                                <span>Fin:</span>
-                                <p>{taskSelected?.endTime || 'No especificada'}</p>
-                            </div>
-                        </div>
-                        <div className="task-detail-item">
-                            <i className="fas fa-exclamation-circle"></i>
-                            <div>
-                                <span>Prioridad:</span>
-                                <p className={`priority priority-${taskSelected.priority.toLowerCase()}`}>
-                                    {taskSelected?.priority}
-                                </p>
-                            </div>
-                        </div>
-                        <div className="task-detail-item">
-                            <i className="fas fa-project-diagram"></i>
-                            <div>
-                                <span>Proyecto:</span>
-                                <p>{taskSelected?.project.name}</p>
-                            </div>
-                        </div>
+                {!taskSelected ? (
+                    <div className="no-content">
+                        <p className="no-content-message">
+                            <i className="fas fa-exclamation-circle"></i> No hay tareas registradas en el sistema
+                        </p>
                     </div>
-                    <footer className="task-footer">
-                        <div className="action-buttons">
+                ) : (
+                    <div className="task-card">
+                        <header className="task-header">
+                            <h1 className="task-title">
+                                <i className="fas fa-tasks"></i> {taskSelected?.name}
+                            </h1>
                             <button
-                                className={`finish-button ${taskStatus === 'COMPLETADO' ? 'disabled' : ''}`}
-                                onClick={setToCompleted}
-                                disabled={taskStatus === 'COMPLETADO'}
+                                className={getStatusClass(taskStatus)}
+                                onClick={cycleStatus}
                             >
-                                <i className="fas fa-check-circle"></i> Finalizar
+                                {taskStatus || 'Cargando...'}
                             </button>
-                            <button className="edit-button" onClick={openEditModal}>
-                                <i className="fas fa-edit"></i> Editar
-                            </button>
-                            <button
-                                className="delete-button"
-                                onClick={() => handlerRemoveTask(taskSelected.id)}
-                            >
-                                <i className="fas fa-trash-alt"></i> Eliminar
-                            </button>
+                        </header>
+                        <p className="task-description">
+                            {taskSelected?.description || 'No hay descripción disponible.'}
+                        </p>
+                        <div className="task-details-grid">
+                            <div className="task-detail-item">
+                                <i className="fas fa-calendar-alt"></i>
+                                <div>
+                                    <span>Inicio:</span>
+                                    <p>{taskSelected?.startTime}</p>
+                                </div>
+                            </div>
+                            <div className="task-detail-item">
+                                <i className="fas fa-calendar-times"></i>
+                                <div>
+                                    <span>Fin:</span>
+                                    <p>{taskSelected?.endTime || 'No especificada'}</p>
+                                </div>
+                            </div>
+                            <div className="task-detail-item">
+                                <i className="fas fa-exclamation-circle"></i>
+                                <div>
+                                    <span>Prioridad:</span>
+                                    <p className={`priority priority-${taskSelected.priority.toLowerCase()}`}>
+                                        {taskSelected?.priority}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="task-detail-item">
+                                <i className="fas fa-project-diagram"></i>
+                                <div>
+                                    <span>Proyecto:</span>
+                                    <p>{taskSelected?.project.name}</p>
+                                </div>
+                            </div>
                         </div>
-                        {isModalOpen && <TaskModal onClose={toggleEditModal} />}
-                        <Link className="back-button" to="/tasks" style={{ textDecoration: 'none' }}>
-                            <i className="fas fa-arrow-left"></i> Volver a Tareas
-                        </Link>
-                    </footer>
-                </div>
+                        <footer className="task-footer">
+                            <div className="action-buttons">
+                                <button
+                                    className={`finish-button ${taskStatus === 'COMPLETADO' ? 'disabled' : ''}`}
+                                    onClick={setToCompleted}
+                                    disabled={taskStatus === 'COMPLETADO'}
+                                >
+                                    <i className="fas fa-check-circle"></i> Finalizar
+                                </button>
+                                <button className="edit-button" onClick={openEditModal}>
+                                    <i className="fas fa-edit"></i> Editar
+                                </button>
+                                <button
+                                    className="delete-button"
+                                    onClick={() => handlerRemoveTask(taskSelected.id)}
+                                >
+                                    <i className="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </div>
+                            {isModalOpen && <TaskModal onClose={toggleEditModal} />}
+                            <Link className="back-button" to="/tasks" style={{ textDecoration: 'none' }}>
+                                <i className="fas fa-arrow-left"></i> Volver a Tareas
+                            </Link>
+                        </footer>
+                    </div>
+                )}
             </div>
         </div>
     );

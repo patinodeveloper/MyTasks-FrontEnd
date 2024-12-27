@@ -56,62 +56,70 @@ export const ProjectDetail = () => {
         <div className="project-detail-page">
             <h1 className="page-title">Detalles del Proyecto</h1>
             <div className="project-detail-container">
-                <div className="project-card">
-                    <header className="project-header">
-                        <h1 className="project-title">
-                            <i className="fas fa-folder"></i> {projectSelected?.name}
-                        </h1>
-                        <button
-                            className={getStatusClass(projectStatus)}
-                            onClick={cycleStatus}
-                        >
-                            {projectStatus || 'Cargando...'}
-                        </button>
-                    </header>
-                    <p className="project-description">
-                        {projectSelected?.description || 'No hay descripción disponible.'}
-                    </p>
-                    <div className="project-details-grid">
-                        <div className="project-detail-item">
-                            <i className="fas fa-calendar-alt"></i>
-                            <div>
-                                <span>Inicio:</span>
-                                <p>{projectSelected?.startTime}</p>
-                            </div>
-                        </div>
-                        <div className="project-detail-item">
-                            <i className="fas fa-calendar-times"></i>
-                            <div>
-                                <span>Fin:</span>
-                                <p>{projectSelected?.endTime || 'No especificada'}</p>
-                            </div>
-                        </div>
+                {!projectSelected ? (
+                    <div className="no-content">
+                        <p className="no-content-message">
+                            <i className="fas fa-exclamation-circle"></i> No existe el proyecto con el ID: <span>{id}</span> en el sistema
+                        </p>
                     </div>
-                    <footer className="project-footer">
-                        <div className="action-buttons">
+                ) : (
+                    <div className="project-card">
+                        <header className="project-header">
+                            <h1 className="project-title">
+                                <i className="fas fa-folder"></i> {projectSelected?.name}
+                            </h1>
                             <button
-                                className={`finish-button ${projectStatus === 'COMPLETADO' ? 'disabled' : ''}`}
-                                onClick={setToCompleted}
-                                disabled={projectStatus === 'COMPLETADO'}
+                                className={getStatusClass(projectStatus)}
+                                onClick={cycleStatus}
                             >
-                                <i className="fas fa-check-circle"></i> Finalizar
+                                {projectStatus || 'Cargando...'}
                             </button>
-                            <button className="edit-button" onClick={openEditModal}>
-                                <i className="fas fa-edit"></i> Editar
-                            </button>
-                            <button
-                                className="delete-button"
-                                onClick={() => handlerRemoveProject(projectSelected.id)}
-                            >
-                                <i className="fas fa-trash-alt"></i> Eliminar
-                            </button>
+                        </header>
+                        <p className="project-description">
+                            {projectSelected?.description || 'No hay descripción disponible.'}
+                        </p>
+                        <div className="project-details-grid">
+                            <div className="project-detail-item">
+                                <i className="fas fa-calendar-alt"></i>
+                                <div>
+                                    <span>Inicio:</span>
+                                    <p>{projectSelected?.startTime}</p>
+                                </div>
+                            </div>
+                            <div className="project-detail-item">
+                                <i className="fas fa-calendar-times"></i>
+                                <div>
+                                    <span>Fin:</span>
+                                    <p>{projectSelected?.endTime || 'No especificada'}</p>
+                                </div>
+                            </div>
                         </div>
-                        {isModalOpen && <ProjectModal onClose={toggleEditModal} />}
-                        <Link className="back-button" to="/projects" style={{ textDecoration: 'none' }}>
-                            <i className="fas fa-arrow-left"></i> Volver a Proyectos
-                        </Link>
-                    </footer>
-                </div>
+                        <footer className="project-footer">
+                            <div className="action-buttons">
+                                <button
+                                    className={`finish-button ${projectStatus === 'COMPLETADO' ? 'disabled' : ''}`}
+                                    onClick={setToCompleted}
+                                    disabled={projectStatus === 'COMPLETADO'}
+                                >
+                                    <i className="fas fa-check-circle"></i> Finalizar
+                                </button>
+                                <button className="edit-button" onClick={openEditModal}>
+                                    <i className="fas fa-edit"></i> Editar
+                                </button>
+                                <button
+                                    className="delete-button"
+                                    onClick={() => handlerRemoveProject(projectSelected.id)}
+                                >
+                                    <i className="fas fa-trash-alt"></i> Eliminar
+                                </button>
+                            </div>
+                            {isModalOpen && <ProjectModal onClose={toggleEditModal} />}
+                            <Link className="back-button" to="/projects" style={{ textDecoration: 'none' }}>
+                                <i className="fas fa-arrow-left"></i> Volver a Proyectos
+                            </Link>
+                        </footer>
+                    </div>
+                )}
             </div>
         </div>
     );

@@ -54,20 +54,28 @@ export const Tasks = () => {
             </button>
             {/* Modal para crear un nuevo proyecto */}
             {isModalOpen && <TaskModal onClose={closeModal} />}
-            <div className="tasks-container">
-                {tasks.map((task) => (
-                    <div className="card-task" key={task.id}>
-                        <h3><i className="fas fa-thumbtack"></i> {task.name}</h3>
-                        <p><strong>Fecha de Inicio:</strong> {task.startTime}</p>
-                        <p className={getStatusClass(task.status)}><strong>Estatus:</strong> {task.status}</p>
-                        <p className={getPriorityClass(task.priority)}><strong>Prioridad:</strong> {task.priority}</p>
-                        <p><strong>Proyecto:</strong> {task.project.name}</p>
-                        <Link className="view-details-btn" to={`/tasks/${task.id}`}>
-                            <i className="fas fa-eye"></i> Ver Detalles
-                        </Link>
-                    </div>
-                ))}
-            </div>
+            {tasks.length === 0 ? (
+                <div className="no-content">
+                    <p className="no-content-message">
+                        <i className="fas fa-exclamation-circle"></i> No hay tareas registradas en el sistema
+                    </p>
+                </div>
+            ) : (
+                <div className="tasks-container">
+                    {tasks.map((task) => (
+                        <div className="card-task" key={task.id}>
+                            <h3><i className="fas fa-thumbtack"></i> {task.name}</h3>
+                            <p><strong>Fecha de Inicio:</strong> {task.startTime}</p>
+                            <p className={getStatusClass(task.status)}><strong>Estatus:</strong> {task.status}</p>
+                            <p className={getPriorityClass(task.priority)}><strong>Prioridad:</strong> {task.priority}</p>
+                            <p><strong>Proyecto:</strong> {task.project.name}</p>
+                            <Link className="view-details-btn" to={`/tasks/${task.id}`}>
+                                <i className="fas fa-eye"></i> Ver Detalles
+                            </Link>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
